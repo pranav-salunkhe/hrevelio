@@ -17,6 +17,8 @@ import { httpTask, WorkflowExecutor } from '@io-orkes/conductor-javascript';
 import { OptimizedCodeResponse } from '@/lib/config/openai';
 import TestCaseComp from './TestCaseComp';
 import { RingLoader } from './RingLoader';
+import Image from 'next/image';
+import hrevelio from '@/public/hrevelio.png'
 export interface Metrics {
     vocabulary: {
         value: number,
@@ -501,6 +503,12 @@ export default function Shell() {
                         size="sm"
                     />
                     <div className='text-center w-full h-full flex justify-center items-center'>
+                        <Image
+                            src={hrevelio}
+                            height={48}
+                            width={48}
+                            alt='hrevelio logo'
+                        />
                         <p className='text-xl font-bold h-full flex justify-center items-center text-center'>Hrevelio</p>
                         {/* <div>Hrevelio</div> */}
                         {/* <div>

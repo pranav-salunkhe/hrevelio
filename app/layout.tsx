@@ -4,8 +4,8 @@ import '@mantine/core/styles.css';
 import './globals.css';
 import { ColorSchemeScript, createTheme, MantineProvider } from '@mantine/core';
 export const metadata = {
-  title: 'My Mantine app',
-  description: 'I have followed setup instructions carefully',
+  title: 'Hrevelio',
+  description: 'A code enhancement tool to deliver code with better developer experience.',
 };
 
 export default function RootLayout({
