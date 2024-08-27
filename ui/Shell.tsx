@@ -275,36 +275,36 @@ export default function Shell() {
     //     setActiveStep(activeStep + 1);
     //     setLoading(false);
     // }
-    // const handleOptimize = async () => {
-    //     setLoading(true);
-    //     const response = await fetch("http://localhost:3000/api/optimize", {
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(code),
-    //     })
-    //     const data = await response.json();
-    //     console.log("optimal: ", data);
-    //     setOptimizedCode(data?.optimal);
-    //     setActiveStep(activeStep + 1);
-    //     setLoading(false)
-    // }
-    // const handleGenerateTestCases = async () => {
-    //     setLoading(true);
-    //     const response = await fetch("http://localhost:3000/api/generate-test-cases", {
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(optimizedCode.optimizedCode),
-    //     })
-    //     const data = await response.json();
-    //     console.log("testcases: ", data);
-    //     setTestCases(data?.testCases);
-    //     setActiveStep(activeStep + 1);
-    //     setLoading(false)
-    // }
+    const handleOptimize = async () => {
+        setLoading(true);
+        const response = await fetch("https://hrevelio.vercel.app/api/optimize", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(code),
+        })
+        const data = await response.json();
+        console.log("optimal: ", data);
+        setOptimizedCode(data?.optimal);
+        setActiveStep(activeStep + 1);
+        setLoading(false)
+    }
+    const handleGenerateTestCases = async () => {
+        setLoading(true);
+        const response = await fetch("https://hrevelio.vercel.app/api/generate-test-cases", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(optimizedCode.optimizedCode),
+        })
+        const data = await response.json();
+        console.log("testcases: ", data);
+        setTestCases(data?.testCases);
+        setActiveStep(activeStep + 1);
+        setLoading(false)
+    }
     const renderContent = () => {
         switch (activeStep) {
             case 0:
@@ -379,7 +379,7 @@ export default function Shell() {
                                     <p className='text-black opacity-60 font-light text-sm'>Needs optimization</p>
                                 </div>
                             </div>
-                            {/* <Button variant='light' disabled={loading} onClick={handleOptimize}><RiAiGenerate /><Space w={4} />
+                            <Button variant='light' disabled={loading} onClick={handleOptimize}><RiAiGenerate /><Space w={4} />
                                 {loading ? (
                                     <>
                                         Optimizing Code... <Loader />
@@ -387,7 +387,7 @@ export default function Shell() {
                                 ) : (
                                     "Optimize!"
                                 )}
-                            </Button> */}
+                            </Button>
                         </div>
                     </div>
                 </div>;
@@ -422,7 +422,7 @@ export default function Shell() {
                                     <p>Needs optimization</p>
                                 </div>
                             </div>
-                            {/* <Button variant='light' disabled={loading} onClick={handleGenerateTestCases}><RiAiGenerate /><Space w={4} />
+                            <Button variant='light' disabled={loading} onClick={handleGenerateTestCases}><RiAiGenerate /><Space w={4} />
                                 {loading ? (
                                     <>
                                         Generating Unit Tests... <Loader />
@@ -430,7 +430,7 @@ export default function Shell() {
                                 ) : (
                                     "Generate Unit Tests!"
                                 )}
-                            </Button> */}
+                            </Button>
                         </div>
                     </div>
                 </div>;
