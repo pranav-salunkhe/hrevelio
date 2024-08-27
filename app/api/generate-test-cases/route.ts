@@ -62,7 +62,3 @@ export async function POST(req: Request) {
   // console.log(run.);
   return Response.json({testCases});
 }
-
-export async function GET(req: NextApiRequest) {
-  return Response.json({message: "success"});
-}
