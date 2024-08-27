@@ -174,7 +174,9 @@ export default function Shell() {
             const response = await executor.startWorkflow({
                 name: "CodeOptimizationWorkflow",
                 version: 1,
-                input: workflowInput,
+                input: {
+                    code: workflowInput
+                },
             });
 
             if (response) {
