@@ -11,13 +11,13 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const data = await req.json();
-  console.log("inside gtc:", data)
+  console.log("inside gtc:", data.code)
   const completions = await openai.beta.chat.completions.parse({
     model: "gpt-4o-2024-08-06",
     messages: [...messages, {
       role: "user",
       content: `Consider the below code:
-      ${data}
+      ${data.code}
 
       YOUR TASK:
       1. Generate 5 unit tests in 'jest' which will help test the given code against the business requirements shared to you.

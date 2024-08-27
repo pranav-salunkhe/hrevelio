@@ -11,6 +11,7 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const data = await req.json();
+  console.log("inside optimize:", data);
   const completions = await openai.beta.chat.completions.parse({
     model: "gpt-4o-2024-08-06",
     messages: [...messages, {

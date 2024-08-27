@@ -9,7 +9,7 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const data = await req.json();
-  console.log("INSIDE SUGG POST REQ:", data)
+  console.log("INSIDE SUGG POST REQ:", data?.code?.code)
   const completions = await openai.beta.chat.completions.parse({
     model: "gpt-4o-2024-08-06",
     messages: [...messages, {
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     {
       role: "user",
       content: `Calculate the halstead metrics for the given javascript code below:\n
-      ${data}
+      ${data?.code?.code}
       `
     }
   ],
