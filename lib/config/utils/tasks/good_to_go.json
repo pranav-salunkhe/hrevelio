@@ -1,0 +1,8 @@
+{
+  "name": "good_to_go",
+  "description": "Marks the workflow as complete when code passes all tests.",
+  "type": "SIMPLE",
+  "inputKeys": [],
+  "outputKeys": ["final_code"],
+  "startDelay": 0
+}

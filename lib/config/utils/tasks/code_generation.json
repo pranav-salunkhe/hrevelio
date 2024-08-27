@@ -1,0 +1,17 @@
+{
+  "name": "code_generation",
+  "description": "Optimizes input code using GPT-4 API.",
+  "retryCount": 3,
+  "timeoutSeconds": 120,
+  "inputKeys": ["code"],
+  "outputKeys": ["optimized_code"],
+  "type": "HTTP",
+  "http_request": {
+    "uri": "http://localhost:3000/api/optimize",
+    "method": "POST",
+    "body": "${workflow.input.code}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

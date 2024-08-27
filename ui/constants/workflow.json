@@ -1,0 +1,68 @@
+{
+  "name": "CodeOptimizationWorkflow",
+  "description": "Workflow to orchestrate code suggestions, optimization, and test case generation.",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "get_suggestions",
+      "taskReferenceName": "getSuggestions",
+      "type": "HTTP",
+      "startDelay": 0,
+      "inputParameters": {
+        "http_request": {
+          "uri": "http://localhost:3000/api/suggestions",
+          "method": "POST",
+          "body": "${workflow.input.code}",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    },
+    {
+      "name": "optimize_code",
+      "taskReferenceName": "optimizeCode",
+      "type": "HTTP",
+      "startDelay": 0,
+      "inputParameters": {
+        "http_request": {
+          "uri": "http://localhost:3000/api/optimize",
+          "method": "POST",
+          "body": "${workflow.input.code}",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    },
+    {
+      "name": "generate_test_cases",
+      "taskReferenceName": "generateTestCases",
+      "type": "HTTP",
+      "startDelay": 0,
+      "inputParameters": {
+        "http_request": {
+          "uri": "http://localhost:3000/api/generate-test-cases",
+          "method": "POST",
+          "body": "${optimizeCode.output.response.body.optimizedCode}",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    }
+  ],
+  "inputParameters": ["code"],
+  "outputParameters": {
+    "suggestionsResult": "${getSuggestions.output.response.body}",
+    "optimizedCodeResult": "${optimizeCode.output.response.body}",
+    "testCasesResult": "${generateTestCases.output.response.body}"
+  },
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": true,
+  "ownerEmail": "pvsalunkhe2003@gmail.com",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 0,
+  "failureWorkflow": ""
+}

@@ -1,0 +1,75 @@
+{
+  "name": "code_optimization_workflow",
+  "description": "Workflow to optimize, test, and approve code.",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "code_generation",
+      "description": "Optimizes input code using GPT-4 API.",
+      "retryCount": 3,
+      "timeoutSeconds": 120,
+      "inputKeys": ["code"],
+      "outputKeys": ["optimized_code"],
+      "type": "HTTP",
+      "http_request": {
+        "uri": "http://localhost:3000/api/optimize",
+        "method": "POST",
+        "body": "${workflow.input.code}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "name": "code_testing",
+      "description": "Generates and runs test cases based on business requirements.",
+      "retryCount": 2,
+      "timeoutSeconds": 300,
+      "inputKeys": ["optimized_code", "business_requirements"],
+      "outputKeys": ["test_results", "passed", "failed"],
+      "type": "HTTP",
+      "http_request": {
+        "uri": "http://localhost:3000/api/test",
+        "method": "POST",
+        "body": {
+          "code": "${code_generation.output.optimized_code}",
+          "requirements": "${workflow.input.business_requirements}"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "name": "code_regeneration",
+      "description": "Regenerates code if initial tests fail.",
+      "retryCount": 2,
+      "timeoutSeconds": 120,
+      "inputKeys": ["failed", "business_requirements", "optimized_code"],
+      "outputKeys": ["regenerated_code"],
+      "type": "HTTP",
+      "http_request": {
+        "uri": "http://localhost:3000/api/regenerate",
+        "method": "POST",
+        "body": {
+          "code": "${code_generation.output.optimized_code}",
+          "requirements": "${workflow.input.business_requirements}",
+          "failed": "${code_testing.failed}",
+          "passed": "${code_testing.passed}"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "name": "good_to_go",
+      "taskReferenceName": "finalApproval",
+      "type": "SIMPLE",
+      "inputParameters": {
+        "final_code": "${testCode.output.passed_code}"
+      }
+    }
+  ],
+  "inputParameters": ["code", "business_requirements"]
+}

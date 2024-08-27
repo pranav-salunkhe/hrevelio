@@ -1,0 +1,20 @@
+{
+  "name": "code_regeneration",
+  "description": "Regenerates code if initial tests fail.",
+  "retryCount": 2,
+  "timeoutSeconds": 120,
+  "inputKeys": ["failed_code", "business_requirements"],
+  "outputKeys": ["regenerated_code"],
+  "type": "HTTP",
+  "http_request": {
+    "uri": "http://localhost:3000/api/regenerate",
+    "method": "POST",
+    "body": {
+      "code": "${code_testing.output.failed_code}",
+      "requirements": "${workflow.input.business_requirements}"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
