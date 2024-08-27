@@ -60,7 +60,3 @@ export async function POST(req: Request) {
   // console.log(run.);
   return Response.json({optimal});
 }
-
-export async function GET(req: NextApiRequest) {
-  return Response.json({message: "success"});
-}
