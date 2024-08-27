@@ -1,11 +1,11 @@
 # What problem does hrevelio solve?
 Code quality and developer experience are two major areas one should focus when writing code irrespective of team setting or solo development. To understand the importance of code quality consider NASA's embedded systems, they have (low level language) code which is generally loosely coupled. The code is written to ensure it performs the expected task in a remote isolated environment. To ensure this, NASA employs various practices one of them being, evaluation of code's quality based on Halstead complexity metrics. These metrics give you an overall idea of how well the code is:
 
--Documented (Comments)
--Modularized (Nesting, Single-Responsibility Principle etc)
--Complexity (Vocabulary, number of operators etc)
--Cyclomatic Complexity (Indicates how difficult it might be to test, maintain, troubleshoot, and produce errors)
--Developer Experience (length of code, cognitive challenges etc)
+- Documented (Comments)
+- Modularized (Nesting, Single-Responsibility Principle etc)
+- Complexity (Vocabulary, number of operators etc)
+- Cyclomatic Complexity (Indicates how difficult it might be to test, maintain, troubleshoot, and produce errors)
+- Developer Experience (length of code, cognitive challenges etc)
 and few more.
 
 When working in a team setting, the codebase is altered by dozens of past developers and will keep on changing overtime. To ensure the code meets the above listed requirements, I decided to build Hrevelio, an automated tool that, based on your input code, would give you an analysis of how well your code is in terms of Halstead measures and which sections of your code are critical(i.e. need improvement) with reasoning and actionable feedback. This would help developers learn and improve their coding acumen. We further help the user to optimize their code to ensure optimal range of halstead measures. But the cycle doesn't just end once you have an optimal code. Testing your code is of utmost importance. Thus, the app generates testcases based on your code's business requirements. I orchestrated the entire workflow using Orkes Conductor.
